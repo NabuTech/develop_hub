@@ -29,7 +29,7 @@ def user_login(request):
             user = authenticate(request, username=username, password=password)
             if user:
                 login(request, user)    
-                return redirect('home')
+                return redirect('dashboard')
     else:
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
@@ -38,3 +38,16 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('login')
+
+# Dashboard
+def dashboard(request):
+    return render(request, 'dashboard.html')
+
+def editproject(request):
+    return render(request, 'editproject.html')
+
+def viewproject (request):
+    return render(request, 'viewproject.html')
+
+def viewuser (request):
+    return render(request, 'viewuser.html')

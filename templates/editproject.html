@@ -1,0 +1,37 @@
+<!-- templates/edit_project.html -->
+
+{% extends 'base.html' %}
+{% include 'header.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <h1 class="display-4 font-weight-bold text-primary">Edit Project</h1>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary mb-3">Back to Dashboard</a>
+
+    <div class="card">
+        <div class="card-body">
+            <form enctype="multipart/form-data">
+                <label for="editProjectName">Project Name:</label>
+                <input type="text" id="editProjectName" class="form-control" value="Web App Development"><br>
+
+                <label for="editDescription">Description:</label>
+                <textarea id="editDescription" class="form-control">Building a Django-based web application.</textarea><br>
+
+                <label for="editImageVideo">Image/Video:</label>
+                <input type="file" id="editImageVideo" accept="image/*, video/*"><br>
+
+                <label for="editSkillsNeeded">Skills Needed:</label>
+                <input type="text" id="editSkillsNeeded" class="form-control" value="Python, Django, HTML, CSS"><br>
+
+                <label for="editProjectLinks">Project Links:</label>
+                <input type="text" id="editProjectLinks" class="form-control" value="https://github.com/example, https://example.com"><br>
+
+                <!-- Add other fields as needed -->
+
+                <button class="btn btn-success" onclick="saveProjectChanges()">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,34 @@
+<!-- templates/view_project.html -->
+
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <h1 class="display-4 font-weight-bold text-primary">View Project</h1>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary mb-3">Back to Dashboard</a>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Project Details</h5>
+            
+            <p class="card-text">
+                <strong>Project Name:</strong> Web App Development<br>
+                <strong>Description:</strong> Building a Django-based web application.<br>
+                <!-- Add more details based on your project model -->
+                <strong>Skills Needed:</strong> Python, Django, HTML, CSS<br>
+                <strong>Project Links:</strong> 
+                <a href="https://github.com/example" target="_blank">GitHub</a>, 
+                <a href="https://example.com" target="_blank">Website</a><br>
+                <!-- Add other details as needed -->
+            </p>
+
+            <!-- Add logic to display image or video -->
+            <img src="https://via.placeholder.com/400" alt="Project Image" class="img-fluid">
+            
+            <!-- Add other details as needed -->
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

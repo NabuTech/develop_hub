@@ -9,14 +9,10 @@
     </p>
 
     {% if request.user.is_authenticated %}
-      <p>Welcome, {{ request.user.username }}</p>
       <a href="{% url 'logout' %}">Logout</a>
     {% else %}
-      <p>
-        Options: 
       <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
       <a href="{% url 'signup' %}" class="btn btn-success">Signup</a>
-      </p>
     {% endif %}
 
     <div class="mt-5">
