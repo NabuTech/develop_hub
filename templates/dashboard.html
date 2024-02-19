@@ -1,0 +1,257 @@
+<!-- templates/dashboard.html -->
+
+{% extends 'base.html' %}
+{% block header %}
+  {% include 'header.html' %}
+{% endblock %}
+{% block content %}
+
+  <div class="container mt-5">
+    {% if request.user.is_authenticated %}
+      <h1 class="display-3 font-weight-bold text-primary">Welcome {{ request.user.username }}</h1>  
+    {% endif %}
+
+    <div class="row" id="profile">
+        <!-- View Mode -->
+        <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Profile</h5>
+                        <p class="card-text">
+                            <img src="https://via.placeholder.com/150" alt="Profile Image" id="profileImage">
+                            <strong>Username:</strong> <span id="username">{{ request.user.username }}</span><br>
+                            <strong>Full Name:</strong> <span id="fullName">John Doe</span><br>
+                            <strong>Email:</strong> <span id="email">john.doe@example.com</span><br>
+                            <strong>Date of Birth:</strong> <span id="dob">January 1, 1990</span><br>
+                            <strong>Location:</strong> <span id="location">City, Country</span><br>
+                            <strong>Skills:</strong>
+                                <div id="skillsContainer">
+                                    <span class="badge badge-primary">Python</span>
+                                    <span class="badge badge-primary">JavaScript</span>
+                                    <span class="badge badge-primary">Django</span>
+                                    <!-- Add Skills dynamically removing placeholders-->
+                                </div>
+                            <br>
+                            <strong>Bio:</strong> <span id="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero.</span><br>
+                            <strong>Github:</strong> <a href="https://github.com/johndoe" target="_blank" id="github">https://github.com/johndoe</a><br>
+                            <strong>Twitter:</strong> <a href="https://twitter.com/johndoe" target="_blank" id="twitter">https://twitter.com/johndoe</a><br>
+                            <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/johndoe" target="_blank" id="linkedin">https://www.linkedin.com/in/johndoe</a><br>
+                        </p>
+                            <!-- Add edit button to switch to edit mode -->
+                        <button class="btn btn-primary" onclick="switchToEditMode()">Edit</button>
+                    </div>
+                </div>
+        </div>
+            <!-- Edit Mode (Hidden by default) -->
+        <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Profile</h5>
+                            <form enctype="multipart/form-data">
+                                <label for="editProfileImage">Profile Image:</label>
+                                <input type="file" id="editProfileImage" accept="image/*"><br>
+
+                                <label for="editUsername">Username:</label>
+                                <input type="text" id="editUsername" value="{{ request.user.username }}"><br>
+
+                                <label for="editFullName">Full Name:</label>
+                                <input type="text" id="editFullName" value="John Doe"><br>
+
+                                <label for="editEmail">Email:</label>
+                                <input type="email" id="editEmail" value="john.doe@example.com"><br>
+
+                                <label for="editDob">Date of Birth:</label>
+                                <input type="text" id="editDob" value="January 1, 1990"><br>
+
+                                <label for="editLocation">Location:</label>
+                                <input type="text" id="editLocation" value="City, Country"><br>
+
+                                <label for="editSkills">Skills:</label>
+                                <input type="text" id="editSkills" value="Python, JavaScript, Django"><br>
+
+                                <label for="editBio">Bio:</label>
+                                <textarea id="editBio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero.</textarea><br>
+
+                                <label for="editGithub">Github:</label>
+                                <input type="text" id="editGithub" value="https://github.com/johndoe"><br>
+
+                                <label for="editTwitter">Twitter:</label>
+                                <input type="text" id="editTwitter" value="https://twitter.com/johndoe"><br>
+
+                                <label for="editLinkedin">LinkedIn:</label>
+                                <input type="text" id="editLinkedin" value="https://www.linkedin.com/in/johndoe"><br>
+
+                                <!-- Add save button to switch back to view mode -->
+                                <button class="btn btn-success" onclick="switchToViewMode()">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    <div class="row" id="my-projects">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">My Projects</h5>
+                    <p class="card-text">Manage your projects.</p>
+                    <!-- Placeholder data for user projects -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card project-card">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2 text-muted">Project 1: Web App Development</h6>
+                                    <p><strong>Description:</strong> Building a Django-based web application.</p>
+                                    <p><strong>Skills Needed:</strong> Python, Django, HTML, CSS</p>
+                                    <p><strong>Links to Project:</strong>
+                                        <ul>
+                                            <li><a href="https://github.com/project1" target="_blank">GitHub</a></li>
+                                            <li><a href="https://www.project1.com" target="_blank">Website</a></li>
+                                        </ul>
+                                    </p>
+                                    <a href="#" class="card-link">Edit Project</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card project-card">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2 text-muted">Project 2: Mobile App Design</h6>
+                                    <p><strong>Description:</strong> Designing a mobile app UI/UX.</p>
+                                    <p><strong>Skills Needed:</strong> UI/UX Design</p>
+                                    <p><strong>Links to Project:</strong>
+                                        <ul>
+                                            <li><a href="https://github.com/project2" target="_blank">GitHub</a></li>
+                                            <li><a href="https://www.project2.com" target="_blank">Website</a></li>
+                                        </ul>
+                                    </p>
+                                    <a href="#" class="card-link">Edit Project</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Add more project cards as needed -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+  
+<!-- ... (previous code) ... -->
+
+<!-- Other Projects Section -->
+<div class="col-md-12 mt-3" id="other-projects">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Other Projects</h5>
+            <p class="card-text">Explore other projects.</p>
+
+            <!-- Filter/Search Option -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="userFilter">Filter Projects by User:</label>
+                    <input type="text" id="userFilter" class="form-control" placeholder="Type to filter projects by user">
+                </div>
+                <div class="col-md-6">
+                    <label for="skillFilter">Filter Projects by Skills:</label>
+                    <input type="text" id="skillFilter" class="form-control" placeholder="Type to filter projects by skills">
+                </div>
+            </div>
+
+            <!-- Placeholder data for other projects -->
+            <div class="row">
+                <!-- Project A Card -->
+                <div class="col-md-4">
+                    <div class="card project-card">
+                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="Project A Image">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">Project A: Machine Learning Research</h6>
+                            <p class="card-text">
+                                <strong>User:</strong> User X<br>
+                                <strong>Skills Needed:</strong> Python, Machine Learning<br>
+                                <strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero.
+                            </p>
+                            <a href="#" class="btn btn-primary">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project B Card -->
+                <div class="col-md-4">
+                    <div class="card project-card">
+                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="Project B Image">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">Project B: Open Source Contribution</h6>
+                            <p class="card-text">
+                                <strong>User:</strong> User Y<br>
+                                <strong>Skills Needed:</strong> Programming, Collaboration<br>
+                                <strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero.
+                            </p>
+                            <a href="#" class="btn btn-primary">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more project cards as needed -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ... (previous code) ... -->
+
+<!-- Other Users Section -->
+<div class="col-md-12 mt-3" id="other-users">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Other Users</h5>
+            <p class="card-text">Explore other users.</p>
+
+            <!-- Filter/Search Option -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="userFilter">Filter Users by Name:</label>
+                    <input type="text" id="userFilter" class="form-control" placeholder="Type to filter users by name">
+                </div>
+                <div class="col-md-6">
+                    <label for="skillFilter">Filter Users by Skills:</label>
+                    <input type="text" id="skillFilter" class="form-control" placeholder="Type to filter users by skills">
+                </div>
+            </div>
+
+            <!-- Placeholder data for other users -->
+            <div class="row">
+                <!-- User X Card -->
+                <div class="col-md-4">
+                    <div class="card user-card">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="User X Image">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">User X: Full Stack Developer</h6>
+                            <p class="card-text">
+                                <strong>Skills:</strong> Python, JavaScript, Django<br>
+                                <strong>Bio:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero.
+                            </p>
+                            <a href="#" class="btn btn-primary">View Profile</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- User Y Card -->
+                <div class="col-md-4">
+                    <div class="card user-card">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="User Y Image">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">User Y: UX/UI Designer</h6>
+                            <p class="card-text">
+                                <strong>Skills:</strong> UX/UI Design, Adobe Creative Suite<br>
+                                <strong>Bio:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero.
+                            </p>
+                            <a href="#" class="btn btn-primary">View Profile</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more user cards as needed -->
+                </div>
+            </div>
+        </div>
+</div>
+    </div>
+<!-- ... (remaining code) ... -->
+
+{% endblock content %}
